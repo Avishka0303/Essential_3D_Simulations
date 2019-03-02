@@ -2,7 +2,9 @@ package chapter1;
 
 import javafx.application.Application;
 import javafx.event.EventType;
+import javafx.scene.Camera;
 import javafx.scene.Group;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Sphere;
@@ -40,7 +42,13 @@ public class Main extends Application {
             }
         });
 
+        //set a camera.
+        Camera camera=new PerspectiveCamera();
+
         Scene scene=new Scene(group,WIDTH, HEIGHT);
+        //set a camera to the scene
+        scene.setCamera(camera);
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("First 3D sphere");
         primaryStage.show();
