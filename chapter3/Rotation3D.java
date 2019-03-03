@@ -1,5 +1,6 @@
 package chapter3;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -46,11 +47,15 @@ public class Rotation3D extends Application {
         //add a new point light.//but the system get darker.
         //group.getChildren().add(new PointLight());
         group.getChildren().addAll(prepareLightSource());
+        group.getChildren().add(new AmbientLight());
 
 
 
         //set a camera.
         Camera camera=new PerspectiveCamera(); //to get the camera to 0,0,0
+        //camera.setNearClip(2);
+        //camera.setFarClip(1000);
+        //camera.translateZProperty().set(-200);
 
         //set scene.
         Scene scene=new Scene(group,WIDTH, HEIGHT);
@@ -96,19 +101,32 @@ public class Rotation3D extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("First 3D sphere");
         primaryStage.show();
+
+        AnimationTimer animationTimer=new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                pointLight.setRotate(pointLight.getRotate()+1);
+            }
+        };
+        animationTimer.start();
     }
+
+    private final PointLight pointLight=new PointLight();
 
     private Node[] prepareLightSource() {
 /*      AmbientLight ambientLight=new AmbientLight();
         ambientLight.setColor(Color.AQUA);
         return ambientLight;*/
-        PointLight pointLight=new PointLight();
+        //PointLight pointLight=new PointLight();
         pointLight.setColor(Color.RED);
         pointLight.getTransforms().add(new Translate(0,50,100));
+        pointLight.setRotationAxis(Rotate.X_AXIS);
 
         //add a sphere into the place of point light.
         Sphere sphere=new Sphere(2);
         sphere.getTransforms().setAll(pointLight.getTransforms());
+        sphere.rotateProperty().bind(pointLight.rotateProperty());
+        sphere.rotationAxisProperty().bind(pointLight.rotationAxisProperty());
         return new Node[]{pointLight,sphere};
     }
 
@@ -122,7 +140,6 @@ public class Rotation3D extends Application {
 
         //reflect when white .
         //material.setSpecularColor(Color.WHITE);
-
 
 
         Box box=new Box(100,20,50);
