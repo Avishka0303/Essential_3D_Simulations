@@ -98,6 +98,15 @@ public class Rotation3D extends Application {
         PhongMaterial material=new PhongMaterial();
         //material.setDiffuseColor(Color.GREENYELLOW);
         material.setDiffuseMap(new Image(getClass().getResourceAsStream("/Resources/dark.jpeg")));
+
+        //reflection map.
+        material.setSpecularMap(new Image(getClass().getResourceAsStream("/Resources/bump3.jpg")));
+
+        //reflect when white .
+        //material.setSpecularColor(Color.WHITE);
+
+
+
         Box box=new Box(100,20,50);
         box.setMaterial(material);
         return box;
