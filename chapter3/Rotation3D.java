@@ -4,10 +4,7 @@ import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point3D;
-import javafx.scene.Camera;
-import javafx.scene.Group;
-import javafx.scene.PerspectiveCamera;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
@@ -44,6 +41,10 @@ public class Rotation3D extends Application {
         Box box=prepareBox();//new Box(100,20,50);
         SmartGroup group=new SmartGroup();
         group.getChildren().add(box);
+        //add a new point light.//but the system get darker.
+        group.getChildren().add(new PointLight());
+
+
 
         //set a camera.
         Camera camera=new PerspectiveCamera(); //to get the camera to 0,0,0
@@ -170,3 +171,5 @@ public class Rotation3D extends Application {
         }
     }
 }
+
+//ambiant light  is for all directions
