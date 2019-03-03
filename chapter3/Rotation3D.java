@@ -8,9 +8,11 @@ import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
@@ -39,7 +41,7 @@ public class Rotation3D extends Application {
     @Override
     public void start(Stage primaryStage) {
         //create a box
-        Box box=new Box(100,20,50);
+        Box box=prepareBox();//new Box(100,20,50);
         SmartGroup group=new SmartGroup();
         group.getChildren().add(box);
 
@@ -56,7 +58,6 @@ public class Rotation3D extends Application {
 
         //initializing mouse control
         initMouseControl(group,scene,primaryStage);
-
 
         //transform
         Transform transform=new Rotate(65,new Point3D(1,0,0));
@@ -91,6 +92,15 @@ public class Rotation3D extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("First 3D sphere");
         primaryStage.show();
+    }
+
+    private Box prepareBox() {
+        PhongMaterial material=new PhongMaterial();
+        //material.setDiffuseColor(Color.GREENYELLOW);
+        material.setDiffuseMap(new Image(getClass().getResourceAsStream("/Resources/dark.jpeg")));
+        Box box=new Box(100,20,50);
+        box.setMaterial(material);
+        return box;
     }
 
     private void initMouseControl(SmartGroup group, Scene scene,Stage stage) {
