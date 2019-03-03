@@ -44,6 +44,7 @@ public class Rotation3D extends Application {
         Box box=prepareBox();//new Box(100,20,50);
         SmartGroup group=new SmartGroup();
         group.getChildren().add(box);
+        group.getChildren().add(prepareBox2());
         //add a new point light.//but the system get darker.
         //group.getChildren().add(new PointLight());
         group.getChildren().addAll(prepareLightSource());
@@ -59,7 +60,7 @@ public class Rotation3D extends Application {
         //camera.translateZProperty().set(-200);
 
         //set scene.
-        Scene scene=new Scene(group,WIDTH, HEIGHT);
+        Scene scene=new Scene(group,WIDTH, HEIGHT,true);
 
         //translate the x and y properties.
         group.translateXProperty().set(WIDTH/2);
@@ -110,6 +111,28 @@ public class Rotation3D extends Application {
             }
         };
         animationTimer.start();
+    }
+
+    private Node prepareBox2() {
+        PhongMaterial material=new PhongMaterial();
+        //material.setDiffuseColor(Color.GREENYELLOW);
+        material.setDiffuseMap(new Image(getClass().getResourceAsStream("/Resources/dark.jpeg")));
+
+        //reflection map.
+        //material.setSpecularMap(new Image(getClass().getResourceAsStream("/Resources/bump3.jpg")));
+
+        //add self illuminations
+        //material.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("/Resources/bump2.jpg")));
+
+        //reflect when white .
+        //material.setSpecularColor(Color.WHITE);
+
+        //set bump
+        material.setBumpMap(new Image(getClass().getResourceAsStream("/Resources/bump4.jpg")));
+
+        Box box=new Box(20,100,50);
+        box.setMaterial(material);
+        return box;
     }
 
     private final PointLight pointLight=new PointLight();
