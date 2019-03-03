@@ -47,7 +47,7 @@ public class Rotation3D extends Application {
         //add a new point light.//but the system get darker.
         //group.getChildren().add(new PointLight());
         group.getChildren().addAll(prepareLightSource());
-        group.getChildren().add(new AmbientLight());
+        //group.getChildren().add(new AmbientLight());
        // group.getChildren().add(new PointLight());
 
 
@@ -137,14 +137,16 @@ public class Rotation3D extends Application {
         material.setDiffuseMap(new Image(getClass().getResourceAsStream("/Resources/dark.jpeg")));
 
         //reflection map.
-        material.setSpecularMap(new Image(getClass().getResourceAsStream("/Resources/bump3.jpg")));
+        //material.setSpecularMap(new Image(getClass().getResourceAsStream("/Resources/bump3.jpg")));
 
         //add self illuminations
-        material.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("/Resources/bump2.jpg")));
+        //material.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("/Resources/bump2.jpg")));
 
         //reflect when white .
         //material.setSpecularColor(Color.WHITE);
 
+        //set bump
+        material.setBumpMap(new Image(getClass().getResourceAsStream("/Resources/bump4.jpg")));
 
         Box box=new Box(100,20,50);
         box.setMaterial(material);
