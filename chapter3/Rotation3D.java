@@ -11,8 +11,10 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
+import javafx.scene.shape.Sphere;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
+import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
 
 public class Rotation3D extends Application {
@@ -42,7 +44,8 @@ public class Rotation3D extends Application {
         SmartGroup group=new SmartGroup();
         group.getChildren().add(box);
         //add a new point light.//but the system get darker.
-        group.getChildren().add(new PointLight());
+        //group.getChildren().add(new PointLight());
+        group.getChildren().addAll(prepareLightSource());
 
 
 
@@ -93,6 +96,20 @@ public class Rotation3D extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("First 3D sphere");
         primaryStage.show();
+    }
+
+    private Node[] prepareLightSource() {
+/*      AmbientLight ambientLight=new AmbientLight();
+        ambientLight.setColor(Color.AQUA);
+        return ambientLight;*/
+        PointLight pointLight=new PointLight();
+        pointLight.setColor(Color.RED);
+        pointLight.getTransforms().add(new Translate(0,50,100));
+
+        //add a sphere into the place of point light.
+        Sphere sphere=new Sphere(2);
+        sphere.getTransforms().setAll(pointLight.getTransforms());
+        return new Node[]{pointLight,sphere};
     }
 
     private Box prepareBox() {
