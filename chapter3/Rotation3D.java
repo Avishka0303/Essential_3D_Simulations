@@ -48,6 +48,7 @@ public class Rotation3D extends Application {
         //group.getChildren().add(new PointLight());
         group.getChildren().addAll(prepareLightSource());
         group.getChildren().add(new AmbientLight());
+       // group.getChildren().add(new PointLight());
 
 
 
@@ -137,6 +138,9 @@ public class Rotation3D extends Application {
 
         //reflection map.
         material.setSpecularMap(new Image(getClass().getResourceAsStream("/Resources/bump3.jpg")));
+
+        //add self illuminations
+        material.setSelfIlluminationMap(new Image(getClass().getResourceAsStream("/Resources/bump2.jpg")));
 
         //reflect when white .
         //material.setSpecularColor(Color.WHITE);
