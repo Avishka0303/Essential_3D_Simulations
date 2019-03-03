@@ -9,6 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.scene.transform.Rotate;
@@ -17,8 +18,8 @@ import javafx.stage.Stage;
 
 public class Rotation3D extends Application {
 
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 1000;
+    private static final float WIDTH = 1400;
+    private static final float HEIGHT = 1000;
 
     //to get the currently clicked x and y value.
     private double anchorX,anchorY;
@@ -54,7 +55,7 @@ public class Rotation3D extends Application {
         group.translateZProperty().set(-1200); //to get the camera out of the sphere.
 
         //initializing mouse control
-        initMouseControl(group,scene);
+        initMouseControl(group,scene,primaryStage);
 
 
         //transform
@@ -92,7 +93,7 @@ public class Rotation3D extends Application {
         primaryStage.show();
     }
 
-    private void initMouseControl(SmartGroup group, Scene scene) {
+    private void initMouseControl(SmartGroup group, Scene scene,Stage stage) {
         Rotate xRotate;
         Rotate yRotate;
         group.getTransforms().addAll(
@@ -116,6 +117,11 @@ public class Rotation3D extends Application {
         scene.setOnMouseDragged(event -> {
             angleX.set(anchorAngleX-(anchorY-event.getSceneY()));
             angleY.set(anchorAngleY+(anchorX-event.getSceneX()));
+        });
+
+        stage.addEventHandler(ScrollEvent.SCROLL,event -> {
+            double movement=event.getDeltaY();
+            group.translateZProperty().set(group.getTranslateZ()+movement);
         });
     }
 
