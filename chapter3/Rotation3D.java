@@ -1,4 +1,4 @@
-package chapter2;
+package chapter3;
 
 import javafx.application.Application;
 import javafx.scene.Camera;
@@ -9,7 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
 
-public class Camera3D extends Application {
+public class Rotation3D extends Application {
 
     private static final int RADIUS = 100;
     private static final int WIDTH = 1000;
